@@ -84,7 +84,7 @@ class NestedModelMixin(ViewSetMixin):
             locked = queryset.get(pk=parent.pk)
 
         except self.parent_model.DoesNotExist:
-            raise exceptions.ValidationError({self.get_parent_name(): "object no longer exists"})
+            raise exceptions.APIException({self.get_parent_name(): "object no longer exists"})
 
         return locked
 
