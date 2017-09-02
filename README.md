@@ -185,6 +185,7 @@ For a working example project that integrates this package, see the */example* d
 cd example
 pip install -r requirements.txt
 python manage.py migrate
+python manage.py createsuperuser
 python manage.py runserver
 ```
 
