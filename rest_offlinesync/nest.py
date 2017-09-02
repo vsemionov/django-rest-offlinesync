@@ -115,6 +115,8 @@ class NestedModelMixin(ViewSetMixin):
             #  - the documentation should warn that locking of the parent is a responsibility of the library's client
             # However, the parent queryset is evaluated also during list requests, which handled without a transaction.
             # This causes internal server errors when trying to lock the queryset with select_for_update().
+            # Another problem is that the parent set may have been created at initialization time,
+            # outside of a transaction.
             self.locked_parent(serializer.validated_data[parent_name])
 
         else:
