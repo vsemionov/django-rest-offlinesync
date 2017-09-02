@@ -6,14 +6,13 @@ from rest_framework import status
 from .models import Document
 
 
-user = User.objects.create(username='test', password='test')
-document = Document.objects.create(user=user, title='test', text='test')
-
-
 class TestDocuments(APITestCase):
 
-    base_url = reverse('document-list', kwargs={'user_id': user.username})
-
     def test_list_success(self):
-        response = self.client.get(self.base_url)
+        user = User.objects.create(username='test', password='test')
+        Document.objects.create(user=user, title='test', text='test')
+
+        base_url = reverse('document-list', kwargs={'user_username': user.username})
+
+        response = self.client.get(base_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
