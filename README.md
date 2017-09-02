@@ -73,7 +73,7 @@ class DocumentViewSet(sync.SyncedModelMixin,
 ```
     queryset = Document.objects.all()
 ```
-NOTE: This is required because the set of viewset mixins in this package override *get_queryset()* to chain-manipulate the queryset of each mixin, and the "base" queryset is defined with this attribute. If you override *get_queryset()* to perform per-request queryset manipulation, you **must** call the superclass's method and start from its result.
+NOTE: This is required because the set of viewset mixins in this package override *get_queryset()* to chain-manipulate the queryset of each mixin, and the "base" queryset is defined with this attribute. If you override *get_queryset()* to perform per-request queryset manipulation, you must call the superclass's method and start from its result.
 
 6. Configure the expiry delay of deleted objects in *settings.py* (optional):
 ```
@@ -113,7 +113,7 @@ Relationships between synchronized models are supported by the *NestedModelMixin
 * write requests fail with http status 404 if the parent object does not exist
   - write requests to objects with deleted parents are allowed in order to ease the synchronization of updated data
 
-The mixin also supports nested viewsets, i.e. ones whose subsequent URL path components correspond to subsequent levels in the model relationship hierarchy. During the creation of new objects, the mixin handles the population of the parent ID field from the value in the request path. It is guaranteed that if removal of an expired deleted parent object is performed during creation of a child of the same object, the creation will either fail with status 404, or succeed before the actual removal (race conditions, leading to database constraint violation errors, and therefore to internal server errors, are prevented).
+The mixin also supports nested viewsets, i.e. ones whose subsequent URL path components correspond to subsequent levels in the model relationship hierarchy. During the creation of new objects, the mixin handles the population of the parent ID field from the value in the request path. It is guaranteed that if removal of an expired deleted parent object is performed during creation of a child of the same object, the creation will either fail with status 404, or succeed before the actual removal.
 
 It is also possible to define aggregate viewsets, i.e. ones that operate over more than one relationship level (e.g. on all grandchildren of an object, regardless of its direct children).
 
@@ -147,7 +147,7 @@ Quotas (limits) of synchronized models are supported by the *LimitedNestedSynced
 * evicts the oldest deleted peer(s) of a deleted object if the limits of deleted objects are exceeded
 * detects if the deleted list endpoint may have returned incomplete results, due to the above eviction, and, if necessary to indicate this condition, modifies the returned http status to 206
 
-NOTE: It is assumed that modification of an object's parent (i.e. moving) will be performed **only** through an aggregate viewset.
+NOTE: It is assumed that modification of an object's parent (i.e. moving) will be performed only through an aggregate viewset.
 
 To enable this mixin:
 1. Configure limits in *settings.py*:
