@@ -190,5 +190,5 @@ python manage.py runserver
 
 #### Current Limitations
 
-* There is no way to retrieve an object, whose parent is deleted. This can be a problem especially if an object is moved to a deleted parent. Then, a syncing client has no way to notice the move. The object would eventually be removed from the server, but will be kept indefinitely on the client.
+* Currently there is no way to retrieve an object, whose parent is deleted. This can be a problem especially if an object is moved to a deleted parent. Then, a syncing client has no way to notice the move. The object would eventually be removed from the server, but will be kept indefinitely on the client.
 * The *NestedModelMixin* currently ensures http 404 errors for deleted parents only if they are direct parents.
