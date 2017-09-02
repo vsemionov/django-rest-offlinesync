@@ -188,8 +188,13 @@ python manage.py migrate
 python manage.py createsuperuser
 python manage.py runserver
 ```
+For a more complete project, which uses aggregate viewsets, see [boomerang].
 
-#### Current Limitations
+
+### Current Limitations
 
 * There is no way to retrieve an object, whose parent is deleted. This can be a problem especially if an object is moved to a deleted parent. Then, a syncing client has no way to notice the move. The object would eventually be removed from the server, but will be kept indefinitely on the client.
 * The *NestedModelMixin* currently ensures http 404 errors for deleted parents only if they are direct parents.
+
+
+[boomerang]: https://github.com/vsemionov/boomerang
