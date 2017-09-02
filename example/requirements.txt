@@ -1,0 +1,4 @@
+Django
+djangorestframework
+drf-nested-routers
+django-rest-offlinesync
