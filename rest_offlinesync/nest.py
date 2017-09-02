@@ -1,5 +1,6 @@
 from django.db import transaction
 from django.shortcuts import get_object_or_404
+from rest_framework import exceptions
 
 from .models import TrackedModel
 from .mixin import ViewSetMixin
@@ -77,11 +78,13 @@ class NestedModelMixin(ViewSetMixin):
         return super().list(request, *args, **kwargs)
 
     def locked_parent(self, parent):
-        queryset = self.parent_model.objects.filter(pk=parent.pk)
+        queryset = self.parent_model.objects.select_for_update()
 
-        queryset = queryset.select_for_update()
+        try:
+            locked = queryset.get(pk=parent.pk)
 
-        locked = get_object_or_404(queryset)
+        except self.parent_model.DoesNotExist:
+            raise exceptions.ValidationError({self.get_parent_name(): "object no longer exists"})
 
         return locked
 
