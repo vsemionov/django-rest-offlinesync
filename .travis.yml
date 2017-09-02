@@ -11,5 +11,5 @@ install:
 cache: pip
 
 script:
-  - coverage run example/manage.py test
+  - coverage run example/manage.py test example
   - coverage report
