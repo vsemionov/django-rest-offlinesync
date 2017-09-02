@@ -117,6 +117,9 @@ class NestedModelMixin(ViewSetMixin):
             # This causes internal server errors when trying to lock the queryset with select_for_update().
             # Another problem is that the parent set may have been created at initialization time,
             # outside of a transaction.
+            # It's preferable to lock the parent instead of catching constraint violations because the latter:
+            #  - is not applicable to the limit subclass, where the parent really needs to be locked for isolation
+            #  - involves a second possibility of error within the same request
             self.locked_parent(serializer.validated_data[parent_name])
 
         else:
