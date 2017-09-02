@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name='django-rest-offlinesync',
 
-    version='0.5.1',
+    version='0.5.2',
 
     description='Offline Data Synchronization for Django REST Framework',
 
