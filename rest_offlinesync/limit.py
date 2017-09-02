@@ -98,6 +98,7 @@ class LimitedNestedSyncedModelMixin(NestedModelMixin, SyncedModelMixin):
 
     @transaction.atomic(savepoint=False)
     def perform_create(self, serializer):
+        # TODO: refactor this method to avoid duplication with the superclass
         parent_name = self.get_parent_name()
 
         save_kwargs = {}

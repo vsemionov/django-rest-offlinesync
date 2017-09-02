@@ -104,6 +104,14 @@ class NestedModelMixin(ViewSetMixin):
         save_kwargs = {}
 
         if self.is_aggregate():
+            # TODO: This lock should ideally be optimized away to save a database query.
+            # To accomplish this:
+            #  - the parent should be locked when its queryset is evaluated and validated
+            #  - the transaction block should be moved to create()
+            #  - this branch should be removed
+            #  - the documentation should warn that locking of the parent is a responsibility of the library's client
+            # However, the parent queryset is evaluated also during list requests, which handled without a transaction.
+            # This causes internal server errors when trying to lock the queryset with select_for_update().
             self.locked_parent(serializer.validated_data[parent_name])
 
         else:
