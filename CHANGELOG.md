@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Initial import from [boomerang]
 
-[Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/0.5.0...HEAD
+[Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/0.5.1...HEAD
 [0.5.1]: https://github.com/vsemionov/django-rest-offlinesync/compare/0.5.0...0.5.1
 
 [boomerang]: https://github.com/vsemionov/boomerang
