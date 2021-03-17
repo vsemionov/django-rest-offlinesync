@@ -55,7 +55,7 @@ class LimitedNestedSyncedModelMixin(NestedModelMixin, SyncedModelMixin):
 
         return len(results) > 0
 
-    @decorators.list_route(suffix='Archive')
+    @decorators.action(detail=False, suffix='Archive')
     def deleted(self, request, *args, **kwargs):
         response = super().deleted(request, *args, **kwargs)
 
