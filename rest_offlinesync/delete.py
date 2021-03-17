@@ -18,7 +18,7 @@ class DeletableModelMixin(ViewSetMixin):
 
         return queryset
 
-    @decorators.list_route(suffix='Archive')
+    @decorators.action(detail=False, suffix='Archive')
     def deleted(self, request, *args, **kwargs):
         self.deleted_object = True
         return self.list(request, *args, **kwargs)
