@@ -3,7 +3,7 @@ from rest_offlinesync.models import TrackedModel
 
 
 class Document(TrackedModel):
-    user = models.ForeignKey('auth.User', to_field='username')
+    user = models.ForeignKey('auth.User', to_field='username', on_delete=models.CASCADE)
 
     title = models.CharField(max_length=128)
     text = models.TextField(max_length=2048)

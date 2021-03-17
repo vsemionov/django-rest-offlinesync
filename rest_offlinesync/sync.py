@@ -86,7 +86,7 @@ class SyncedModelMixin(DeletableModelMixin):
 
         return self.decorated_list(SyncedModelMixin, context, request, *args, **kwargs)
 
-    @decorators.list_route(suffix='Archive')
+    @decorators.action(detail=False, suffix='Archive')
     def deleted(self, request, *args, **kwargs):
         response = super().deleted(request, *args, **kwargs)
 
